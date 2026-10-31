@@ -1,19 +1,6 @@
 package uk.ac.westminster.products_api;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = DigitalProduct.class, name = "digital"),
-        @JsonSubTypes.Type(value = PhysicalProduct.class, name = "physical")
-})
-
-public class Product {
+public abstract class Product {
 
     private Long id;
     private String name;
@@ -26,6 +13,9 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    public abstract String getSummary();
+
     public Long getId() { return id;}
     public String getName() { return name;}
     public double getPrice() { return price; }
